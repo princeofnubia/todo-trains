@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('getTodos/', views.register, name="getTodos"), # get the todos a user
+    path('getTodos/', views.getTodos, name="getTodos"), # get the todos a user
     path('updateTodos/', views.login, name="updateTodos"), # call it when we are editing
     path('trashTodo/', views.trash, name="trashTodos"), # handles the soft deletion of the todo
     path('emptyTrash/', views.emptyTrash, name="emptyTrash"), # completely delete it from your system

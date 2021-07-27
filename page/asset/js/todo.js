@@ -61,3 +61,27 @@ deleteAllBtn.onclick = ()=>{
   localStorage.setItem("todo", JSON.stringify(listArray)); //set the item in localstorage
   showTasks(); //call the showTasks function
 }
+
+function fetchData() {
+  window.fetch('http://127.0.0.1:8000/api/v1/todo/getTodos', {credentials: 'omit'}).then(data => {
+    return data.json()
+  }, err => console.log("there was an error", err)).then(data => {
+    const pendingTasksNumb = document.querySelector(".pendingTasks");
+    pendingTasksNumb.textContent = data.length; //passing the array length in pendingtask
+    if(data.length > 0){ //if array length is greater than 0
+      deleteAllBtn.classList.add("active"); //active the delete button
+    }else{
+      deleteAllBtn.classList.remove("active"); //unactive the delete button
+    }
+    let newLiTag = "";
+    for (const key in data) {
+      if (data.hasOwnProperty(key)) {
+        const element = data[key];
+        newLiTag += `<li>${element.task_name}<span class="icon" onclick="deleteTask(${key})"><i class="fas fa-trash"></i></span></li>`;
+      }
+    }
+    todoList.innerHTML = newLiTag;
+  })
+}
+
+fetchData()
