@@ -42,7 +42,7 @@ function showTasks(){
   }
   let newLiTag = "";
   listArray.forEach((element, index) => {
-    newLiTag += `<li>${element}<span class="icon" onclick="deleteTask(${index})"><i class="fas fa-trash"></i></span></li>`;
+    newLiTag += `<ul class="todoListBody"><li> ${index} </li><li> ${element} </li><li>201011 </li> <li>progress </li> <span class="icon" onclick="deleteTask(${index})"><i class="fas fa-trash"></i></span></ul>`;
   });
   todoList.innerHTML = newLiTag; //adding new li tag inside ul tag
   inputBox.value = ""; //once task added leave the input field blank
@@ -75,9 +75,10 @@ function fetchData() {
     }
     let newLiTag = "";
     for (const key in data) {
+      let index = 1
       if (data.hasOwnProperty(key)) {
         const element = data[key];
-        newLiTag += `<li>${element.task_name}<span class="icon" onclick="deleteTask(${key})"><i class="fas fa-trash"></i></span></li>`;
+        newLiTag += `<ul class="todoListBody"><li> ${index++} </li><li> ${element.task_name} </li><li>201011 </li> <li>progress </li> <span class="icon" onclick="deleteTask(${index})"><i class="fas fa-trash"></i></span></ul>`;
       }
     }
     todoList.innerHTML = newLiTag;
