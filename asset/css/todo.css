@@ -12,18 +12,21 @@
 }
 
 body {
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     /* overflow: hidden; */
     padding: 10px;
-    background: linear-gradient(to bottom, #68EACC 0%, #497BE8 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #c5caca 0%, #fefffc 100%);
 }
 
 .wrapper {
     background: #fff;
-    max-width: 400px;
+    max-width: 90vw;
+    height: 85vh;
     width: 100%;
-    margin: 120px auto;
     padding: 25px;
     border-radius: 5px;
     box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
@@ -43,7 +46,7 @@ body {
 }
 
 .inputField input {
-    width: 85%;
+    width: 95%;
     height: 100%;
     outline: none;
     border-radius: 3px;
@@ -58,7 +61,7 @@ body {
 }
 
 .inputField button {
-    width: 50px;
+    width: 5%;
     height: 100%;
     border: none;
     color: #fff;
@@ -85,7 +88,7 @@ body {
 }
 
 .wrapper .todoList {
-    max-height: 250px;
+    width: 100%;
     overflow-y: auto;
 }
 
@@ -102,11 +105,27 @@ body {
     overflow: hidden;
 }
 
-.todoList li .icon {
-    position: absolute;
-    right: -45px;
+.todoListBody {
+    display: flex;
+    justify-content: space-between;
+    background: #f2f2f2;
+    padding: 0px 5px 0px 5px;
+}
+
+.w-20 {
+    width: 20%
+}
+
+.todoListBody span.icon {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 0px;
     background: #e74c3c;
+    margin: 4px;
     width: 45px;
+    visibility: hidden;
     text-align: center;
     color: #fff;
     border-radius: 0 3px 3px 0;
@@ -114,8 +133,16 @@ body {
     transition: all 0.2s ease;
 }
 
-.todoList li:hover .icon {
+.todoListBody:hover span.icon {
+    position: relative;
+    background: blue;
     right: 0px;
+    display: flex;
+    visibility: visible;
+    margin: 5px 10px;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
 }
 
 .wrapper .footer {
@@ -149,11 +176,15 @@ body {
 }
 
 .todoListHeader {
-    text-decoration: none;
     display: flex;
+    list-style: none;
+    justify-content: space-between;
+    background: #d6d6d6;
+    padding: 10px 25px 10px 20px;
 }
 
 .todo-head {
     font-size: 15px;
     text-decoration: none;
+    position: relative;
 }
