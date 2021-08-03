@@ -9,24 +9,15 @@ from .models import Todo
 
 
 # Create your views here.
-def register(request):
-    return HttpResponse
-def login(request):
-    return HttpResponse
-def trash(request):
-    return HttpResponse
+@api_view(['PUT'])
 def emptyTrash(request):
-    return HttpResponse
-def archiveTodo(request):
-    return HttpResponse
-def getTrash(request):
-    return HttpResponse
-def getArchived(request):
-    return HttpResponse
+    todo = Todo.objects.all().filter(is_trashed = True).delete()
+    return Response({'message': 'trash is empty'})
+
 
 @api_view(['GET'])
 def getTodos(request):
-    todo = Todo.objects.all()
+    todo = Todo.objects.all().filter(is_trashed = False, is_archived = False)
     context =  TodoSerializer(todo, many=True)
     return Response(context.data)
 
@@ -49,3 +40,34 @@ def updateTodo(request):
     ids = request_data['id'] #return id and pop it off
     context = Todo.objects.filter(id=ids).update(**f)
     return Response({'message': "Todo update"}, status=status.HTTP_201_CREATED)
+
+
+@api_view(['PUT'])
+def archiveTodo(request):
+    # convert the string to int request_data is immutable
+    request_data = request.data.copy()  # deep copy deep copy is mutable
+    ids = request_data['id'] #return id and pop it off
+    context = Todo.objects.filter(id=ids).update(is_archived = True)
+    return Response({'message': "Todo archived"}, status=status.HTTP_201_CREATED)
+
+@api_view(['GET'])
+def getArchived(request):
+    # convert the string to int request_data is immutable
+    todo = Todo.objects.all().filter(is_archived=True)
+    context =  TodoSerializer(todo, many=True)
+    return Response(context.data)
+
+@api_view(['GET'])
+def getTrash(request):
+    # convert the string to int request_data is immutable
+    todo = Todo.objects.all().filter(is_trashed=True)
+    context =  TodoSerializer(todo, many=True)
+    return Response(context.data)
+
+@api_view(['PUT'])
+def trash(request):
+    # convert the string to int request_data is immutable
+    request_data = request.data.copy()  # deep copy deep copy is mutable
+    ids = request_data['id'] #return id and pop it off
+    context = Todo.objects.filter(id=ids).update(is_trashed = True, is_archived = False)
+    return Response({'message': "Todo trashed"}, status=status.HTTP_201_CREATED)
