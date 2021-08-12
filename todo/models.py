@@ -7,6 +7,7 @@ class Todo(models.Model):
     IN_PROGRESS='in-progress'
     DONE='done'
     TODO='todo'
+    todo_id = models.IntegerField(primary_key=True, default=False) 
     task_status=[(IN_PROGRESS,'in-progress'), (DONE,'done'),(TODO,'todo')]
     task_name = models.CharField(max_length=50)
     task_status =models.CharField(max_length=15, choices=task_status,default=TODO)

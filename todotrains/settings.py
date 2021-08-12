@@ -39,9 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'todo.apps.TodoConfig',
     'corsheaders',
-    'rest_framework'
+    'rest_framework',
+    'drf_yasg'
 ]
-
+REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' }
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -88,7 +89,7 @@ DATABASES = {
         'PASSWORD':'',
         'HOST': 'localhost',
         'PORT': '3306',
-        'NAME': 'Exquistodo'
+        'NAME': 'db.sqlite3'
     }
 }
 
